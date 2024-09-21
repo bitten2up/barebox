@@ -5,7 +5,7 @@ KBUILD_DEFCONFIG := rv64i_defconfig
 KBUILD_CPPFLAGS += -fno-strict-aliasing
 
 ifeq ($(CONFIG_ARCH_RV32I),y)
-	KBUILD_CPPFLAGS += -mabi=ilp32
+	KBUILD_CPPFLAGS += -mabi=ilp32d
 	riscv-ldflags-y += -melf32lriscv
 else
 	KBUILD_CPPFLAGS += -mabi=lp64
@@ -13,7 +13,7 @@ else
 endif
 
 # ISA string setting
-riscv-march-$(CONFIG_ARCH_RV32I)	:= rv32im
+riscv-march-$(CONFIG_ARCH_RV32I)	:= rv32i2p0_mfdc
 riscv-march-$(CONFIG_ARCH_RV64I)	:= rv64im
 
 # Newer binutils versions default to ISA spec version 20191213 which moves some

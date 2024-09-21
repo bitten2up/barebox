@@ -83,6 +83,7 @@ static int simplefb_parse_dt(struct device *dev,
 
 static int simplefb_probe(struct device *dev)
 {
+	printf("Simplefb_probe :3\n");
 	int ret;
 	struct simplefb_params params;
 	struct simplefb *simplefb;
@@ -96,11 +97,13 @@ static int simplefb_probe(struct device *dev)
 	if (ret)
 		return ret;
 
+	#if 0
 	mem = dev_request_mem_resource(dev, 0);
 	if (IS_ERR(mem)) {
 		dev_err(dev, "No memory resource\n");
 		return PTR_ERR(mem);
 	}
+	#endif
 
 	simplefb = xzalloc(sizeof(*simplefb));
 
@@ -116,8 +119,8 @@ static int simplefb_probe(struct device *dev)
 	info->blue = params.format->blue;
 	info->transp = params.format->transp;
 
-	info->screen_base = (void *)mem->start;
-	info->screen_size = resource_size(mem);
+	info->screen_base = (void*)0x40c00000;
+	info->screen_size = 0x00800000;
 
 
 	info->fbops = &simplefb_ops;
